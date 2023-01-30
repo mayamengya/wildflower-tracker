@@ -33,4 +33,4 @@ valuable data on how environments around us is changing.
 - As a user, I want to be able to view a list of species of wildflowers in my collection.
 - As a user, I want to be able to select a wildflower, and view a list of all the locations it grows. 
 - As a user, I want to be able to see statistics about specific species of wildflowers, including which time 
-of year they bloom. 
+of year they bloom.  
