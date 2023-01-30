@@ -1,10 +1,29 @@
-# My Personal Project
+# Wildflower Tracker
 
-## A subtitle
+## Track nature's blooms with ease 
 
-A *bulleted* list:
-- item 1
-- item 2
-- item 3
+**What will the application do?**
+- This application will allow users to track the wildflowers 
+they spot outdoors by entering the type of wildflower that
+was spotted, the location/date it was seen and an image. 
+Possible features include the ability to view through the total
+different types of wildflowers seen so far, statistics about 
+which location has the most variety of flowers, when is the best time of 
+year to see certain types of wildflowers and a chart visualizing the
+trends when is peak wildflower season in each location. 
 
-An example of text with **bold** and *italic* fonts.  
+**Who will use it?**
+- This application can be used by a variety of demographics and ages, from 
+children tracking wildflowers in local parks, to backcountry hikers wanting to know
+when is the best time to spot alpine flowers in the mountains. Primarily, it will target users
+who have an interest in the outdoors and nature. 
+
+**Why is this project of interest to you?** 
+- Wildflowers are beautiful to see - but many species (especially in alpine conditions)
+only bloom for a short time during the year. With so many beautiful hikes around
+BC, I hope that this application can help other wildflower-enthusiasts
+better understand the blooming cycles around them, and act as a diary of 
+their outdoor adventures! Finally, due to the ramifications of climate change, these blooming 
+cycles have been directly impacted over the past few years, with many species 
+blooming earlier due to warmer conditions. I hope that this application can also provide 
+valuable data on how the environment around us is changing.
