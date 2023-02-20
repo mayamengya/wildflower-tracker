@@ -29,8 +29,7 @@ blooming earlier due to warmer conditions. I hope that this application can also
 valuable data on how environments around us is changing.
 
 ## User Stories 
-- As a user, I want to be able to add a wildflower to my collection.
-- As a user, I want to be able to view a list of species of wildflowers in my collection.
-- As a user, I want to be able to select a wildflower, and view a list of all the locations it grows. 
-- As a user, I want to be able to see statistics about specific species of wildflowers, including which time 
-of year they bloom. 
+- As a user, I want to be able to add and remove a wildflower to my collection.
+- As a user, I want to be able to check if I have seen a type of wildflower before. 
+- As a user, I want to be able to view a list of the different types of wildflowers in my collection.
+- As a user, I want to be able to view a list of all the locations a specific wildflower grows.
