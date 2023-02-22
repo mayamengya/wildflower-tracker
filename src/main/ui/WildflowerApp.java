@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class WildflowerApp {
 
-    private static Scanner input = new Scanner(System.in);
+    private static final Scanner input = new Scanner(System.in);
     private static WildflowerList wildflowerList;
 
     public WildflowerApp() {
