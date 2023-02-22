@@ -2,7 +2,9 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class WildflowerListTest {
@@ -37,12 +39,23 @@ class WildflowerListTest {
     }
 
     @Test
+    void addMultipleWildflower() {
+        testWildflowerList.addWildflower(testWildflower1);
+        testWildflowerList.addWildflower(testWildflower3);
+        testWildflowerList.addWildflower(testWildflower4);
+        assertEquals(3, testWildflowerList.getWildflowerList().size());
+        assertTrue(testWildflowerList.getWildflowerList().contains(testWildflower1));
+        assertTrue(testWildflowerList.getWildflowerList().contains(testWildflower3));
+        assertTrue(testWildflowerList.getWildflowerList().contains(testWildflower4));
+    }
+
+    @Test
     void removeOneWildflowerSuccess() {
         testWildflowerList.addWildflower(testWildflower1);
         testWildflowerList.addWildflower(testWildflower2);
         testWildflowerList.addWildflower(testWildflower3);
         assertTrue(testWildflowerList.removeWildflower("Salmonberry", "Vancouver Island", "May"));
-        assertEquals(2,testWildflowerList.getWildflowerList().size());
+        assertEquals(2, testWildflowerList.getWildflowerList().size());
         assertEquals("Bluebell", testWildflowerList.getWildflowerList().get(1).getType());
     }
 
@@ -51,8 +64,9 @@ class WildflowerListTest {
         testWildflowerList.addWildflower(testWildflower1);
         testWildflowerList.addWildflower(testWildflower2);
         testWildflowerList.addWildflower(testWildflower3);
-        assertFalse(testWildflowerList.removeWildflower("Salmonberry", "Vancouver Island", "January"));
-        assertEquals(3,testWildflowerList.getWildflowerList().size());
+        assertFalse(testWildflowerList.removeWildflower("Salmonberry", "Vancouver Island",
+                "January"));
+        assertEquals(3, testWildflowerList.getWildflowerList().size());
         assertEquals("Bluebell", testWildflowerList.getWildflowerList().get(2).getType());
     }
 
