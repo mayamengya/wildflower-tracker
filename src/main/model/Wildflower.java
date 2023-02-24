@@ -1,5 +1,6 @@
 package model;
 
+// Represents a wildflower that has a type, location and month
 public class Wildflower {
     private final String type;
     private final String location;

@@ -3,11 +3,13 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-
+// Represents a list having a title and a list of Wildflower
 public class WildflowerList {
-    private String title;
-    private List<Wildflower> wildflowerList;
+    private final String title;
+    private final List<Wildflower> wildflowerList;
 
+    // REQUIRES: title must be a non-empty string and initially be an empty list
+    // EFFECTS: constructs a WildflowerList object with a title and an empty list
     public WildflowerList(String title) {
         wildflowerList = new ArrayList<>();
         this.title = title;
@@ -15,23 +17,22 @@ public class WildflowerList {
 
     public String getTitle() {
         return title;
-
     }
 
     public List<Wildflower> getWildflowerList() {
         return wildflowerList;
     }
 
-    // REQUIRES: type and location to be non-empty strings, date must be positive integer
+    // REQUIRES: type, location and month to be non-empty strings
     // MODIFIES: this
-    // EFFECTS: adds new wildflower to list
+    // EFFECTS: adds a new wildflower to list
     public void addWildflower(Wildflower wildflower) {
         wildflowerList.add(wildflower);
     }
 
     // MODIFIES: this
-    // EFFECTS: Removes wildflower with the same type, location and month, and return true.
-    // If no wildflower with the same type, location and month is found, return false.
+    // EFFECTS: removes wildflower with the same type, location and month, and returns true
+    // If no wildflower with the same type, location and month is found, return false
     public Boolean removeWildflower(String type, String location, String month) {
         for (Wildflower wildflower : wildflowerList) {
             if (wildflower.getType().equals(type)
@@ -46,9 +47,8 @@ public class WildflowerList {
         return false;
     }
 
-    // EFFECTS: If wildflower with the same type as the given type is in collection,
-    // return true. Otherwise, return false.
-
+    // EFFECTS: return true if Wildflower with the same type as the given type is in collection,
+    // Otherwise, return false.
     public Boolean haveISeenThisWildflower(String type) {
         for (Wildflower wildflower : wildflowerList) {
             if (wildflower.getType().equals(type)) {
@@ -61,8 +61,7 @@ public class WildflowerList {
     // EFFECTS: returns a list of all wildflower types in collection
     public List<String> getWildflowerTypes() {
         List<String> wildflowerTypes = new ArrayList<>();
-        for (int i = 0; i < wildflowerList.size(); i++) {
-            Wildflower currentWildflower = wildflowerList.get(i);
+        for (Wildflower currentWildflower : wildflowerList) {
             String currentType = currentWildflower.getType();
             if (!wildflowerTypes.contains(currentType)) {
                 wildflowerTypes.add(currentType);
@@ -71,12 +70,12 @@ public class WildflowerList {
         return wildflowerTypes;
     }
 
-    // EFFECTS: returns a list of all locations of a specific wildflower in collection
+    // EFFECTS: returns a list of all locations of a specific wildflower type
     public List<String> getWildflowerLocations(String type) {
         List<String> wildflowerLocations = new ArrayList<>();
-        for (int i = 0; i < wildflowerList.size(); i++) {
-            if (wildflowerList.get(i).getType().equals(type)) {
-                wildflowerLocations.add(wildflowerList.get(i).getLocation());
+        for (Wildflower wildflower : wildflowerList) {
+            if (wildflower.getType().equals(type)) {
+                wildflowerLocations.add(wildflower.getLocation());
             }
         }
         return wildflowerLocations;

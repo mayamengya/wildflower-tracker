@@ -33,6 +33,8 @@ class WildflowerListTest {
     void addOneWildflower() {
         testWildflowerList.addWildflower(testWildflower1);
         assertEquals(1, testWildflowerList.getWildflowerList().size());
+
+        // checking to see if all Wildflower fields are added correctly
         assertEquals("Salmonberry", testWildflowerList.getWildflowerList().get(0).getType());
         assertEquals("Vancouver Island", testWildflowerList.getWildflowerList().get(0).getLocation());
         assertEquals("May", testWildflowerList.getWildflowerList().get(0).getMonth());
@@ -44,6 +46,8 @@ class WildflowerListTest {
         testWildflowerList.addWildflower(testWildflower3);
         testWildflowerList.addWildflower(testWildflower4);
         assertEquals(3, testWildflowerList.getWildflowerList().size());
+
+        // checking to see if list contains correct Wildflowers
         assertTrue(testWildflowerList.getWildflowerList().contains(testWildflower1));
         assertTrue(testWildflowerList.getWildflowerList().contains(testWildflower3));
         assertTrue(testWildflowerList.getWildflowerList().contains(testWildflower4));
@@ -55,8 +59,44 @@ class WildflowerListTest {
         testWildflowerList.addWildflower(testWildflower2);
         testWildflowerList.addWildflower(testWildflower3);
         assertTrue(testWildflowerList.removeWildflower("Salmonberry", "Vancouver Island", "May"));
+
+        // checking to see if list is correct size after removing one Wildflower
         assertEquals(2, testWildflowerList.getWildflowerList().size());
+
+        // checking to see if index of wildflower updated after removal of one Wildflower
         assertEquals("Bluebell", testWildflowerList.getWildflowerList().get(1).getType());
+    }
+
+    @Test
+    void removeMultipleWildflowerSuccess() {
+        testWildflowerList.addWildflower(testWildflower1);
+        testWildflowerList.addWildflower(testWildflower2);
+        testWildflowerList.addWildflower(testWildflower3);
+        testWildflowerList.addWildflower(testWildflower4);
+
+        // remove first Wildflower
+        assertTrue(testWildflowerList.removeWildflower("Salmonberry", "Vancouver Island", "May"));
+
+        // checking to see if size of list and index of objects are updated after removal of one Wildflower
+        assertEquals(3, testWildflowerList.getWildflowerList().size());
+        assertEquals("Salmonberry", testWildflowerList.getWildflowerList().get(0).getType());
+        assertEquals("Saltspring Island", testWildflowerList.getWildflowerList().get(0).getLocation());
+        assertEquals("June", testWildflowerList.getWildflowerList().get(0).getMonth());
+
+        // removing  second wildflower
+        assertTrue(testWildflowerList.removeWildflower
+                ("Salmonberry", "Saltspring Island", "June"));
+
+        // checking to see if size of list and index of objects are updated after removal of another Wildflower
+        assertEquals(2, testWildflowerList.getWildflowerList().size());
+        assertEquals("Bluebell", testWildflowerList.getWildflowerList().get(0).getType());
+        assertEquals("Whistler", testWildflowerList.getWildflowerList().get(0).getLocation());
+        assertEquals("March", testWildflowerList.getWildflowerList().get(0).getMonth());
+
+        // removing the remaining wildflowers and checking to see if list is now empty
+        assertTrue(testWildflowerList.removeWildflower("Bluebell", "Whistler", "March"));
+        assertTrue(testWildflowerList.removeWildflower("Douglas Aster", "Sunshine Coast", "August"));
+        assertTrue(testWildflowerList.getWildflowerList().isEmpty());
     }
 
     @Test
@@ -66,6 +106,8 @@ class WildflowerListTest {
         testWildflowerList.addWildflower(testWildflower3);
         assertFalse(testWildflowerList.removeWildflower("Salmonberry", "Vancouver Island",
                 "January"));
+
+        // wildflower does not exist in list, checking to see that list is still same size and index
         assertEquals(3, testWildflowerList.getWildflowerList().size());
         assertEquals("Bluebell", testWildflowerList.getWildflowerList().get(2).getType());
     }

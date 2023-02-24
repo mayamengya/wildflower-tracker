@@ -5,11 +5,16 @@ import model.Wildflower;
 
 import java.util.Scanner;
 
+// Wildflower Application
+// Code structure below adapted from Teller App:
+// https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
 public class WildflowerApp {
 
     private static final Scanner input = new Scanner(System.in);
     private static WildflowerList wildflowerList;
 
+    // MODIFIES: this
+    // EFFECTS: runs a menu for managing a WildflowerList
     public WildflowerApp() {
         wildflowerList = new WildflowerList("My Wildflower Collection");
         boolean keepRunning = true;
@@ -35,6 +40,7 @@ public class WildflowerApp {
         System.out.println("Goodbye and happy exploring!");
     }
 
+    // EFFECTS: processes user command
     private boolean handleChoice(int choice) {
         switch (choice) {
             case 4:
@@ -51,7 +57,7 @@ public class WildflowerApp {
         }
     }
 
-
+    // EFFECTS: display menu of options to user
     private static void displayMenu() {
         System.out.println("\nWelcome to the Wildflower Tracker App!");
         System.out.println("Please choose an option:");
@@ -63,6 +69,8 @@ public class WildflowerApp {
         System.out.println("6. Return to nature");
     }
 
+   // MODIFIES: this
+   // EFFECTS: adds a Wildflower to the WildflowerList with type, location and month
     private static void addWildflower() {
         System.out.print("Enter the type of the wildflower: ");
         String type = input.nextLine();
@@ -75,6 +83,9 @@ public class WildflowerApp {
         System.out.println(type + " added to the collection!");
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes a Wildflower from the WildflowerList with type, location and month
+    // that matches the given type, location and month
     private static void removeWildflower() {
         System.out.print("Enter the type of the wildflower you wish to remove: ");
         String type = input.nextLine();
@@ -90,6 +101,7 @@ public class WildflowerApp {
         }
     }
 
+    // EFFECTS: return true if given type is found in WildflowerList, otherwise return false
     private static void haveISeenThisWildflower() {
         System.out.print("Enter the type of the wildflower: ");
         String type = input.nextLine();
@@ -101,11 +113,13 @@ public class WildflowerApp {
         }
     }
 
+    // EFFECTS: return true if given type is found in WildflowerList, otherwise return false
     private static void displayWildflowerTypes() {
         System.out.println("Wildflower types in the collection:");
         wildflowerList.getWildflowerTypes().forEach(System.out::println);
     }
 
+    // EFFECTS: returns a list of all the locations of Wildflowers whose type matched given type
     private static void displayWildflowerLocations() {
         System.out.print("Enter the type of the wildflower: ");
         String type = input.nextLine();

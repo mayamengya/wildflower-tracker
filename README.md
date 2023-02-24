@@ -5,12 +5,11 @@
 **What will the application do?**
 - This application will allow users to track the wildflowers 
 they spot outdoors by entering the type of wildflower that
-was spotted, the location/date it was seen and an image. 
+was spotted, location and the month it was seen. 
 Possible features include the ability to view through the total
 different types of wildflowers seen so far, statistics about 
-which location has the most variety of flowers, when is the best time of 
-year to see certain types of wildflowers and a chart visualizing the
-trends when is peak wildflower season in each location. 
+which locations specific types of wildflowers grow at, and when is the best month of 
+the year to see certain types of wildflowers.
 
 **Who will use it?**
 - This application can be used by a variety of demographics and ages, from 
@@ -29,7 +28,7 @@ blooming earlier due to warmer conditions. I hope that this application can also
 valuable data on how environments around us is changing.
 
 ## User Stories 
-- As a user, I want to be able to add and remove a wildflower to my collection.
+- As a user, I want to be able to add and remove a wildflower to my tracking list.
 - As a user, I want to be able to check if I have seen a type of wildflower before. 
-- As a user, I want to be able to view a list of the different types of wildflowers in my collection.
+- As a user, I want to be able to view a list of the different types of wildflowers seen so far.
 - As a user, I want to be able to view a list of all the locations a specific wildflower grows.
