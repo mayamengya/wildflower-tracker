@@ -1,6 +1,5 @@
 package persistence;
 
-import model.Wildflower;
 import model.WildflowerList;
 import org.json.JSONObject;
 
@@ -9,7 +8,7 @@ import java.io.*;
 // Code structure below adapted from JsonSerializationDemo:
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
-// Represents a writer that writes JSON representation of wildflowerlist to file
+// Represents a writer that writes JSON representation of wildflower list to file
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;

@@ -2,7 +2,11 @@ package ui;
 
 import model.WildflowerList;
 import model.Wildflower;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // Wildflower Application
@@ -12,6 +16,7 @@ public class WildflowerApp {
 
     private static final Scanner input = new Scanner(System.in);
     private static WildflowerList wildflowerList;
+    private static final String JSON_STORE = "./data/WildflowerList.json";
 
     // MODIFIES: this
     // EFFECTS: runs a menu for managing a WildflowerList
@@ -50,6 +55,12 @@ public class WildflowerApp {
                 displayWildflowerLocations();
                 return true;
             case 6:
+                saveWildflowerList();
+                return true;
+            case 7:
+                loadWildflowerList();
+                return true;
+            case 8:
                 return false;
             default:
                 System.out.println("Invalid choice. Please enter a number between 1 and 5.");
@@ -66,7 +77,9 @@ public class WildflowerApp {
         System.out.println("3. Have I seen this wildflower before?");
         System.out.println("4. Display all wildflower types seen so far");
         System.out.println("5. Display all locations for a specific wildflower type");
-        System.out.println("6. Return to nature");
+        System.out.println("6. Save wildflower list to file");
+        System.out.println("7. Load wildflower list from file");
+        System.out.println("8. Return to nature");
     }
 
    // MODIFIES: this
@@ -125,6 +138,31 @@ public class WildflowerApp {
         String type = input.nextLine();
         System.out.println("Locations where " + type + " was seen:");
         wildflowerList.getWildflowerLocations(type).forEach(System.out::println);
+    }
+
+    // EFFECTS: saves the wildflower list to file
+    private void saveWildflowerList() {
+        try {
+            JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
+            jsonWriter.open();
+            jsonWriter.write(wildflowerList);
+            jsonWriter.close();
+            System.out.println("Saved " + wildflowerList.getTitle() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadWildflowerList() {
+        try {
+            JsonReader jsonReader = new JsonReader(JSON_STORE);
+            wildflowerList = jsonReader.read();
+            System.out.println("Loaded " + wildflowerList.getTitle() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }
 
