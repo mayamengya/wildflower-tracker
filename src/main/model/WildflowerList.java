@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents a list having a title and a list of Wildflower
-public class WildflowerList {
+public class WildflowerList implements Writable {
     private final String title;
     private final List<Wildflower> wildflowerList;
 
@@ -79,6 +83,24 @@ public class WildflowerList {
             }
         }
         return wildflowerLocations;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("title", title);
+        json.put("wildflower", wildflowersToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this wildflowerlist as a JSON array
+    private JSONArray wildflowersToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Wildflower w : wildflowerList) {
+            jsonArray.put(w.toJson());
+        }
+        return jsonArray;
     }
 }
 

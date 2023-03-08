@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a wildflower that has a type, location and month
-public class Wildflower {
+public class Wildflower implements Writable {
     private final String type;
     private final String location;
     private final String month;
@@ -26,6 +29,16 @@ public class Wildflower {
     public String getMonth() {
         return month;
     }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("type", type);
+        json.put("month", month);
+        json.put("location", location);
+        return json;
+    }
 }
+
 
 

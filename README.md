@@ -32,3 +32,5 @@ valuable data on how environments around us is changing.
 - As a user, I want to be able to check if I have seen a type of wildflower before. 
 - As a user, I want to be able to view a list of the different types of wildflowers seen so far.
 - As a user, I want to be able to view a list of all the locations a specific wildflower grows.
+- As a user, I want to be able to save my wildflower list to file (if I so choose).
+- As a user, I want to be able to load my wildflower list to file (if I so choose). 
