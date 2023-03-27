@@ -8,7 +8,7 @@ public class GUI {
     JFrame frame = new JFrame();
     JLabel logo = new JLabel();
 
-    // EFFECTS: initializes main menu
+    // EFFECTS: initializes main menu and data
     public GUI() {
         initializeLogo();
 
