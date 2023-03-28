@@ -2,6 +2,7 @@ package ui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
@@ -70,6 +71,12 @@ public class GUI extends JFrame {
         frame.add(controlPanel);
         controlPanel.add(addWildflower);
         controlPanel.add(removeWildflower);
+        controlPanel.add(haveISeenThisWildflower);
+        controlPanel.add(displayTypes);
+        controlPanel.add(displayLocations);
+        controlPanel.add(save);
+        controlPanel.add(load);
+        controlPanel.setLayout(null);
 
     }
 
@@ -83,14 +90,76 @@ public class GUI extends JFrame {
         button.setOpaque(true);
         button.setBorderPainted(true);
         button.setVisible(true);
+        button.setEnabled(true);
         button.setBorder(BorderFactory.createEtchedBorder());
-        //button.addActionListener(new ButtonListener());
+        button.addActionListener(new ButtonListener());
+
     }
 
     // MODIFIES: this
     // EFFECTS: initializes the main menu JButtons
     public void initializeButtons() {
-        makeButton(addWildflower, "Add", 20, 510, font, deepPurple, cloudBlue);
-        makeButton(removeWildflower, "Remove", 20, 620, font, deepPurple, cloudBlue);
+        makeButton(addWildflower, "Add", 20, 10, font, deepPurple, cloudBlue);
+        makeButton(removeWildflower, "Remove", 20, 120, font, deepPurple, cloudBlue);
+        makeButton(haveISeenThisWildflower, "Have I seen this before?", 20, 120,
+                font, deepPurple, cloudBlue);
+        makeButton(displayTypes, "Types", 220, 230,
+                font, deepPurple, cloudBlue);
+        makeButton(displayLocations, "Locations", 230, 340,
+                font, deepPurple, cloudBlue);
+        makeButton(save, "Save", 340, 340,
+                font, deepPurple, cloudBlue);
+        makeButton(load, "Load", 340, 340,
+                font, deepPurple, cloudBlue);
+    }
+
+    // Represents the listener of the buttons in the main menu of the GUI
+    static class ButtonListener implements ActionListener {
+
+        // EFFECTS: performs appropriate actions after buttons are clicked
+        // Code structure below adapted from Teller App:
+        // https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getActionCommand().equals("Add")) {
+                addWildflowerAction();
+            } else if (e.getActionCommand().equals("Remove")) {
+                removeWildflowerAction();
+            } else if (e.getActionCommand().equals("Have I seen this before?")) {
+                haveISeenThisWildflowerAction();
+            } else if (e.getActionCommand().equals("Display")) {
+                displayTypesAction();
+            } else if (e.getActionCommand().equals("Location")) {
+                displayLocationsAction();
+            } else if (e.getActionCommand().equals("Save")) {
+                saveAction();
+            } else if (e.getActionCommand().equals("Load")) {
+                loadAction();
+            } else {
+                System.out.println("That option does not exist!");
+            }
+        }
+
+        private void addWildflowerAction() {
+        }
+
+        private void removeWildflowerAction() {
+        }
+
+        private void haveISeenThisWildflowerAction() {
+        }
+
+        private void displayTypesAction() {
+        }
+
+        private void displayLocationsAction() {
+        }
+
+        private void saveAction() {
+        }
+
+        private void loadAction() {
+        }
+
     }
 }
