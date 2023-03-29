@@ -42,5 +42,5 @@ valuable data on how environments around us is changing.
   labelled "Types".
 - You can locate my visual component by looking at the background image, as well as each of the images
   added to the buttons specified in the previous points.
-- You can save the state of my application by clicking the button labelled "Save"
-- You can reload the state of my application by clicking the button labelled "Load"
+- You can save the state of my application by clicking the button labelled "Save".
+- You can reload the state of my application by clicking the button labelled "Load".
