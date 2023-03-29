@@ -1,5 +1,10 @@
 package ui;
 
+import model.Wildflower;
+import model.WildflowerList;
+import persistence.JsonReader;
+import persistence.JsonWriter;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,6 +33,10 @@ public class GUI extends JFrame {
     JButton save = new JButton("Save");
     JButton load = new JButton("Load");
 
+    private static final String JSON_STORE = "./data/WildflowerList.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+
 
     // EFFECTS: initializes main menu and data
     public GUI() {
@@ -35,8 +44,6 @@ public class GUI extends JFrame {
         initializePanels();
         initializeMainFrame();
         initializeButtons();
-
-
     }
 
     // MODIFIES: this
@@ -80,8 +87,8 @@ public class GUI extends JFrame {
 
     }
 
-    public void makeButton(JButton button, String text, int x, int y, Font f,
-                           Color foreground, Color background) {
+    public void makeButtonMiddle(JButton button, String text, int x, int y, Font f,
+                                 Color foreground, Color background) {
         button.setText(text);
         button.setBounds(x, y, 210, 100);
         button.setFont(f);
@@ -93,23 +100,52 @@ public class GUI extends JFrame {
         button.setEnabled(true);
         button.setBorder(BorderFactory.createEtchedBorder());
         button.addActionListener(new ButtonListener());
+    }
 
+    public void makeButtonMiddleTB(JButton button, String text, int x, int y, Font f,
+                                   Color foreground, Color background) {
+        button.setText(text);
+        button.setBounds(x, y, 140, 60);
+        button.setFont(f);
+        button.setForeground(foreground);
+        button.setBackground(background);
+        button.setOpaque(true);
+        button.setBorderPainted(true);
+        button.setVisible(true);
+        button.setEnabled(true);
+        button.setBorder(BorderFactory.createEtchedBorder());
+        button.addActionListener(new ButtonListener());
+    }
+
+    public void makeButtonSides(JButton button, String text, int x, int y, Font f,
+                                Color foreground, Color background) {
+        button.setText(text);
+        button.setBounds(x, y, 140, 60);
+        button.setFont(f);
+        button.setForeground(foreground);
+        button.setBackground(background);
+        button.setOpaque(true);
+        button.setBorderPainted(true);
+        button.setVisible(true);
+        button.setEnabled(true);
+        button.setBorder(BorderFactory.createEtchedBorder());
+        button.addActionListener(new ButtonListener());
     }
 
     // MODIFIES: this
     // EFFECTS: initializes the main menu JButtons
     public void initializeButtons() {
-        makeButton(addWildflower, "Add", 20, 10, font, deepPurple, cloudBlue);
-        makeButton(removeWildflower, "Remove", 20, 120, font, deepPurple, cloudBlue);
-        makeButton(haveISeenThisWildflower, "Have I seen this before?", 20, 120,
+        makeButtonSides(addWildflower, "Add", 60, 35, font, deepPurple, cloudBlue);
+        makeButtonSides(removeWildflower, "Remove", 60, 235, font, deepPurple, cloudBlue);
+        makeButtonMiddle(haveISeenThisWildflower, "Have I seen this before?", 245, 125,
                 font, deepPurple, cloudBlue);
-        makeButton(displayTypes, "Types", 220, 230,
+        makeButtonSides(displayTypes, "Types", 490, 35,
                 font, deepPurple, cloudBlue);
-        makeButton(displayLocations, "Locations", 230, 340,
+        makeButtonSides(displayLocations, "Locations", 490, 235,
                 font, deepPurple, cloudBlue);
-        makeButton(save, "Save", 340, 340,
+        makeButtonMiddleTB(save, "Save", 280, 35,
                 font, deepPurple, cloudBlue);
-        makeButton(load, "Load", 340, 340,
+        makeButtonMiddleTB(load, "Load", 280, 235,
                 font, deepPurple, cloudBlue);
     }
 
@@ -140,7 +176,33 @@ public class GUI extends JFrame {
             }
         }
 
+        // MODIFIES:
+        // EFFECTS:
         private void addWildflowerAction() {
+            ImageIcon icon = new ImageIcon("wildflower-tracker-icon.png");
+            String type = JOptionPane.showInputDialog(null,
+                    "Enter the type of the wildflower:",
+                    "Add Wildflower", JOptionPane.PLAIN_MESSAGE, icon,
+                    null, "").toString();
+            String location = JOptionPane.showInputDialog(null,
+                    "Enter the location where you found the wildflower:",
+                    "Add Wildflower", JOptionPane.PLAIN_MESSAGE, icon,
+                    null, "").toString();
+            String month = JOptionPane.showInputDialog(null,
+                    "Enter the month when you found the wildflower:", "Add Wildflower",
+                    JOptionPane.PLAIN_MESSAGE, icon, null, "").toString();
+
+            if (type != null && !type.isEmpty() && location != null && !location.isEmpty()
+                    && month != null && !month.isEmpty()) {
+                Wildflower wildflower = new Wildflower(type, location, month);
+                WildflowerList wildflowerList = new WildflowerList("My Wildflower List");
+                wildflowerList.addWildflower(wildflower);
+                JOptionPane.showMessageDialog(null, "Wildflower added successfully!",
+                        "Success", JOptionPane.INFORMATION_MESSAGE, icon);
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid input. Please try again.",
+                        "Unsuccessful", JOptionPane.INFORMATION_MESSAGE, icon);
+            }
         }
 
         private void removeWildflowerAction() {
