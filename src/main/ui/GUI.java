@@ -7,8 +7,11 @@ import persistence.JsonWriter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 
 // Represents the graphic user interface for Wildflower Tracker
@@ -16,7 +19,7 @@ public class GUI extends JFrame {
     // Aesthetic constants
     Color deepPurple = new Color(49, 26, 95);
     Color cloudBlue = new Color(191, 235, 244);
-    Font font = new Font("04b_03", Font.PLAIN, 20);
+    Font font = new Font("04b_03", Font.PLAIN, 15);
 
     // Layout
     JPanel logoPanel = new JPanel();
@@ -36,6 +39,8 @@ public class GUI extends JFrame {
     private static final String JSON_STORE = "./data/WildflowerList.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
+
+    private WildflowerList wildflowerList = new WildflowerList("My Wildflower List");
 
 
     // EFFECTS: initializes main menu and data
@@ -99,7 +104,7 @@ public class GUI extends JFrame {
         button.setVisible(true);
         button.setEnabled(true);
         button.setBorder(BorderFactory.createEtchedBorder());
-        button.addActionListener(new ButtonListener());
+        button.addActionListener(new ButtonListener(wildflowerList));
     }
 
     public void makeButtonMiddleTB(JButton button, String text, int x, int y, Font f,
@@ -114,7 +119,7 @@ public class GUI extends JFrame {
         button.setVisible(true);
         button.setEnabled(true);
         button.setBorder(BorderFactory.createEtchedBorder());
-        button.addActionListener(new ButtonListener());
+        button.addActionListener(new ButtonListener(wildflowerList));
     }
 
     public void makeButtonSides(JButton button, String text, int x, int y, Font f,
@@ -129,7 +134,7 @@ public class GUI extends JFrame {
         button.setVisible(true);
         button.setEnabled(true);
         button.setBorder(BorderFactory.createEtchedBorder());
-        button.addActionListener(new ButtonListener());
+        button.addActionListener(new ButtonListener(wildflowerList));
     }
 
     // MODIFIES: this
@@ -150,7 +155,14 @@ public class GUI extends JFrame {
     }
 
     // Represents the listener of the buttons in the main menu of the GUI
-    static class ButtonListener implements ActionListener {
+    class ButtonListener implements ActionListener {
+        private WildflowerList wildflowerList;
+
+        public ButtonListener(WildflowerList wildflowerList) {
+            this.wildflowerList = wildflowerList;
+        }
+
+
 
         // EFFECTS: performs appropriate actions after buttons are clicked
         // Code structure below adapted from Teller App:
@@ -163,7 +175,7 @@ public class GUI extends JFrame {
                 removeWildflowerAction();
             } else if (e.getActionCommand().equals("Have I seen this before?")) {
                 haveISeenThisWildflowerAction();
-            } else if (e.getActionCommand().equals("Display")) {
+            } else if (e.getActionCommand().equals("Types")) {
                 displayTypesAction();
             } else if (e.getActionCommand().equals("Location")) {
                 displayLocationsAction();
@@ -177,7 +189,7 @@ public class GUI extends JFrame {
         }
 
         // EFFECTS: opens window for user to input type, location and month of wildflower to add
-        private void addWildflowerAction() {
+        public void addWildflowerAction() {
             ImageIcon icon = new ImageIcon("wildflower-tracker-icon.png");
             String type = JOptionPane.showInputDialog(null,
                     "Enter the type of the wildflower:",
@@ -194,7 +206,6 @@ public class GUI extends JFrame {
             if (type != null && !type.isEmpty() && location != null && !location.isEmpty()
                     && month != null && !month.isEmpty()) {
                 Wildflower wildflower = new Wildflower(type, location, month);
-                WildflowerList wildflowerList = new WildflowerList("My Wildflower List");
                 wildflowerList.addWildflower(wildflower);
                 JOptionPane.showMessageDialog(null, "Wildflower added successfully!",
                         "Success", JOptionPane.INFORMATION_MESSAGE, icon);
@@ -202,44 +213,73 @@ public class GUI extends JFrame {
                 JOptionPane.showMessageDialog(null, "Invalid input. Please try again.",
                         "Unsuccessful", JOptionPane.INFORMATION_MESSAGE, icon);
             }
+
         }
 
         // EFFECTS: opens window for user to select wildflower to remove from list
-        private void removeWildflowerAction() {
-            WildflowerList myWildflowerList = new WildflowerList("My Wildflower List");
-
-            String type = JOptionPane.showInputDialog(null, "Enter the type of the wildflower:",
-                    "Remove Wildflower", JOptionPane.PLAIN_MESSAGE);
-            String location = JOptionPane.showInputDialog(null, "Enter the location where you found the wildflower:",
-                    "Remove Wildflower", JOptionPane.PLAIN_MESSAGE);
-            String month = JOptionPane.showInputDialog(null, "Enter the month when you found the wildflower:",
-                    "Remove Wildflower", JOptionPane.PLAIN_MESSAGE);
-
-            if (myWildflowerList.removeWildflower(type, location, month)) {
-                ImageIcon icon = new ImageIcon("wildflower-tracker-icon.png");
-                JOptionPane.showMessageDialog(null, "Wildflower removed successfully!",
-                        "Success", JOptionPane.INFORMATION_MESSAGE, icon);
-            } else {
-                ImageIcon icon = new ImageIcon("wildflower-tracker-icon.png");
-                JOptionPane.showMessageDialog(null, "No matching wildflower found.",
-                        "Unsuccessful", JOptionPane.INFORMATION_MESSAGE, icon);
-            }
+        public void removeWildflowerAction() {
         }
 
         private void haveISeenThisWildflowerAction() {
         }
 
-        private void displayTypesAction() {
+        public void displayTypesAction() {
+            List<String> wildflowerTypes = wildflowerList.getWildflowerTypes();
+            String message = "Wildflower types in your collection:\n";
+            for (String type : wildflowerTypes) {
+                message += type + "\n";
+            }
+            ImageIcon icon = new ImageIcon("wildflower-tracker-icon.png");
+            JOptionPane.showMessageDialog(null, message, "Wildflower Types",
+                    JOptionPane.INFORMATION_MESSAGE, icon);
+            System.out.println("wildflowerList: " + wildflowerList.toString());
+
         }
 
-        private void displayLocationsAction() {
+        public void displayLocationsAction() {
         }
 
-        private void saveAction() {
+        // MODIFIES: WildflowerList.json
+        // EFFECTS: saves the wildflower list to file
+        public void saveAction() {
+            jsonWriter = new JsonWriter(JSON_STORE);
+            try {
+                jsonWriter.open();
+                jsonWriter.write(wildflowerList);
+                jsonWriter.close();
+                String message = "Your wildflowers have been successfully saved!";
+                ImageIcon icon = new ImageIcon("wildflower-tracker-icon.png");
+                JOptionPane.showMessageDialog(null, message, "Wildflower Types",
+                        JOptionPane.INFORMATION_MESSAGE, icon);
+            } catch (FileNotFoundException e) {
+                System.out.println("Unable to save wildflower list to " + JSON_STORE);
+            }
+            System.out.println("wildflowerList: " + wildflowerList.toString());
+            System.out.println("JSON_STORE path: " + JSON_STORE);
+
         }
 
-        private void loadAction() {
-        }
+        // MODIFIES: WildflowerList.json
+        // EFFECTS: loads wildflower list from file
+        public void loadAction() {
+            jsonReader = new JsonReader(JSON_STORE);
+            ImageIcon icon = new ImageIcon("wildflower-tracker-icon.png");
+            String message = "Your wildflowers have successfully loaded!";
+            try {
+                wildflowerList = jsonReader.read();
+                JOptionPane.showMessageDialog(null, message
+                        + JSON_STORE, "Load Successful", JOptionPane.INFORMATION_MESSAGE, icon);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Unable to read from file: "
+                        + JSON_STORE, "Load Error", JOptionPane.ERROR_MESSAGE, icon);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Invalid data found in file: "
+                        + JSON_STORE, "Load Error", JOptionPane.ERROR_MESSAGE, icon);
+            }
+            System.out.println("JSON_STORE path: " + JSON_STORE);
+            System.out.println("loadAction() method called.");
+            System.out.println("wildflowerList: " + wildflowerList.toString());
 
+        }
     }
 }
