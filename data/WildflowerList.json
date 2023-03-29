@@ -1,8 +1,15 @@
 {
-    "wildflower": [{
-        "month": "may",
-        "location": "surrey",
-        "type": "sunflower"
-    }],
+    "wildflower": [
+        {
+            "month": "may",
+            "location": "surrey",
+            "type": "sunflower"
+        },
+        {
+            "month": "july",
+            "location": "surrey",
+            "type": "lily"
+        }
+    ],
     "title": "My Wildflower List"
 }
