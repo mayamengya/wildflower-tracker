@@ -176,8 +176,7 @@ public class GUI extends JFrame {
             }
         }
 
-        // MODIFIES:
-        // EFFECTS:
+        // EFFECTS: opens window for user to input type, location and month of wildflower to add
         private void addWildflowerAction() {
             ImageIcon icon = new ImageIcon("wildflower-tracker-icon.png");
             String type = JOptionPane.showInputDialog(null,
@@ -205,7 +204,26 @@ public class GUI extends JFrame {
             }
         }
 
+        // EFFECTS: opens window for user to select wildflower to remove from list
         private void removeWildflowerAction() {
+            WildflowerList myWildflowerList = new WildflowerList("My Wildflower List");
+
+            String type = JOptionPane.showInputDialog(null, "Enter the type of the wildflower:",
+                    "Remove Wildflower", JOptionPane.PLAIN_MESSAGE);
+            String location = JOptionPane.showInputDialog(null, "Enter the location where you found the wildflower:",
+                    "Remove Wildflower", JOptionPane.PLAIN_MESSAGE);
+            String month = JOptionPane.showInputDialog(null, "Enter the month when you found the wildflower:",
+                    "Remove Wildflower", JOptionPane.PLAIN_MESSAGE);
+
+            if (myWildflowerList.removeWildflower(type, location, month)) {
+                ImageIcon icon = new ImageIcon("wildflower-tracker-icon.png");
+                JOptionPane.showMessageDialog(null, "Wildflower removed successfully!",
+                        "Success", JOptionPane.INFORMATION_MESSAGE, icon);
+            } else {
+                ImageIcon icon = new ImageIcon("wildflower-tracker-icon.png");
+                JOptionPane.showMessageDialog(null, "No matching wildflower found.",
+                        "Unsuccessful", JOptionPane.INFORMATION_MESSAGE, icon);
+            }
         }
 
         private void haveISeenThisWildflowerAction() {
