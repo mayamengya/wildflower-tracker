@@ -93,6 +93,7 @@ public class GUI extends JFrame {
 
     }
 
+    // EFFECTS: constructs button for middle
     public void makeButtonMiddle(JButton button, String text, int x, int y, Font f,
                                  Color foreground, Color background) {
         button.setText(text);
@@ -107,6 +108,7 @@ public class GUI extends JFrame {
         button.setBorder(BorderFactory.createEtchedBorder());
     }
 
+    // EFFECTS: constructs button for middle top and bottom
     public void makeButtonMiddleTB(JButton button, String text, int x, int y, Font f,
                                    Color foreground, Color background) {
         button.setText(text);
@@ -121,6 +123,7 @@ public class GUI extends JFrame {
         button.setBorder(BorderFactory.createEtchedBorder());
     }
 
+    // EFFECTS: constructs button for sides
     public void makeButtonSides(JButton button, String text, int x, int y, Font f,
                                 Color foreground, Color background) {
         button.setText(text);
@@ -202,6 +205,7 @@ public class GUI extends JFrame {
             }
         }
 
+        // MODIFIES: this
         // EFFECTS: opens window for user to input type, location and month of wildflower to add
         public void addWildflowerAction() {
             try {
@@ -231,6 +235,7 @@ public class GUI extends JFrame {
             }
         }
 
+        // MODIFIES: this
         // EFFECTS: opens window for user input the type, location and month of the wildflower they want to remove
         public void removeWildflowerAction() {
             ImageIcon icon = new ImageIcon("wildflower-tracker-icon.png");
@@ -256,6 +261,7 @@ public class GUI extends JFrame {
 
         }
 
+        // MODIFIES: this
         // EFFECTS: opens window for user to input type of wildflower to check if they have seen it before
         private void haveISeenThisWildflowerAction() {
             ImageIcon icon = new ImageIcon("wildflower-tracker-icon.png");
@@ -280,6 +286,7 @@ public class GUI extends JFrame {
             }
         }
 
+        // MODIFIES: this
         //EFFECTS: displays all types of wildflowers inputted so far, no duplicates
         public void displayTypesAction() {
             List<String> wildflowerTypes = wildflowerList.getWildflowerTypes();
@@ -292,6 +299,7 @@ public class GUI extends JFrame {
                     JOptionPane.INFORMATION_MESSAGE, icon);
         }
 
+        // MODIFIES: this
         //EFFECTS: displays all the locations the inputted has been seen before, no duplicates
         public void displayLocationsAction() {
             ImageIcon icon = new ImageIcon("wildflower-tracker-icon.png");
