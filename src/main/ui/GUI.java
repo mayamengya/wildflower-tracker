@@ -289,8 +289,6 @@ public class GUI extends JFrame {
             ImageIcon icon = new ImageIcon("wildflower-tracker-icon.png");
             JOptionPane.showMessageDialog(null, message.toString(), "Wildflower Types",
                     JOptionPane.INFORMATION_MESSAGE, icon);
-
-
         }
 
         //EFFECTS: displays all the locations the inputted has been seen before, no duplicates
