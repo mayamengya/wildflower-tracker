@@ -28,5 +28,15 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="json-20210307" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/fonts" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/fonts" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>

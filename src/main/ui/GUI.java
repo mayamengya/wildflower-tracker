@@ -19,7 +19,7 @@ public class GUI extends JFrame {
     // Aesthetic constants
     Color deepPurple = new Color(49, 26, 95);
     Color cloudBlue = new Color(191, 235, 244);
-    Font font = new Font("04b_03", Font.PLAIN, 15);
+    Font font = new Font("04B_03__.TTF", Font.PLAIN, 15);
 
     // Layout
     JPanel logoPanel = new JPanel();
