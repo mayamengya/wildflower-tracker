@@ -204,30 +204,31 @@ public class GUI extends JFrame {
 
         // EFFECTS: opens window for user to input type, location and month of wildflower to add
         public void addWildflowerAction() {
-            ImageIcon icon = new ImageIcon("wildflower-tracker-icon.png");
-            String type = JOptionPane.showInputDialog(null,
-                    "Enter the type of the wildflower:",
-                    "Add Wildflower", JOptionPane.PLAIN_MESSAGE, icon,
-                    null, "").toString();
-            String location = JOptionPane.showInputDialog(null,
-                    "Enter the location where you found the wildflower:",
-                    "Add Wildflower", JOptionPane.PLAIN_MESSAGE, icon,
-                    null, "").toString();
-            String month = JOptionPane.showInputDialog(null,
-                    "Enter the month when you found the wildflower:", "Add Wildflower",
-                    JOptionPane.PLAIN_MESSAGE, icon, null, "").toString();
+            try {
+                ImageIcon icon = new ImageIcon("wildflower-tracker-icon.png");
+                String type = JOptionPane.showInputDialog(null,
+                        "Enter the type:", "Add Wildflower", JOptionPane.PLAIN_MESSAGE, icon,
+                        null, "").toString();
+                String location = JOptionPane.showInputDialog(null,
+                        "Enter the location:", "Add Wildflower", JOptionPane.PLAIN_MESSAGE, icon,
+                        null, "").toString();
+                String month = JOptionPane.showInputDialog(null,
+                        "Enter the month when you found the wildflower:", "Add Wildflower",
+                        JOptionPane.PLAIN_MESSAGE, icon, null, "").toString();
 
-            if (type != null && !type.isEmpty() && location != null && !location.isEmpty()
-                    && month != null && !month.isEmpty()) {
-                Wildflower wildflower = new Wildflower(type, location, month);
-                wildflowerList.addWildflower(wildflower);
-                JOptionPane.showMessageDialog(null, "Wildflower added successfully!",
-                        "Success", JOptionPane.INFORMATION_MESSAGE, icon);
-            } else {
-                JOptionPane.showMessageDialog(null, "Invalid input. Please try again.",
-                        "Unsuccessful", JOptionPane.INFORMATION_MESSAGE, icon);
+                if (type != null && !type.isEmpty() && location != null && !location.isEmpty()
+                        && month != null && !month.isEmpty()) {
+                    Wildflower wildflower = new Wildflower(type, location, month);
+                    wildflowerList.addWildflower(wildflower);
+                    JOptionPane.showMessageDialog(null, "Wildflower added successfully!",
+                            "Success", JOptionPane.INFORMATION_MESSAGE, icon);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid input. Please try again.",
+                            "Unsuccessful", JOptionPane.INFORMATION_MESSAGE, icon);
+                }
+            } catch (NullPointerException e) {
+                // how do I close my JOptionPane
             }
-
         }
 
         // EFFECTS: opens window for user input the type, location and month of the wildflower they want to remove
