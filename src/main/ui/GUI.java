@@ -4,6 +4,8 @@ import model.Wildflower;
 import model.WildflowerList;
 import persistence.JsonReader;
 import persistence.JsonWriter;
+import model.EventLog;
+import model.Event;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,10 +14,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 
 // Represents the graphic user interface for Wildflower Tracker
-public class GUI extends JFrame {
+public class GUI extends JFrame implements ListSelectionListener {
     // Aesthetic constants
     Color deepPurple = new Color(49, 26, 95);
     Color cloudBlue = new Color(191, 235, 244);
@@ -50,6 +56,7 @@ public class GUI extends JFrame {
         initializeMainFrame();
         initializeButtons();
         initializeData();
+        EventLog.getInstance().clear();
     }
 
     // MODIFIES: this
@@ -90,7 +97,22 @@ public class GUI extends JFrame {
         controlPanel.add(save);
         controlPanel.add(load);
         controlPanel.setLayout(null);
+        logEventsStart();
+    }
 
+    // MODIFIES: this
+    // EFFECTS: initializes event logging
+    public void logEventsStart() {
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                for (Event event : EventLog.getInstance()) {
+                    System.out.println(event.toString() + "\n");
+                }
+                System.exit(0);
+            }
+        });
     }
 
     // EFFECTS: constructs button for middle
@@ -171,6 +193,11 @@ public class GUI extends JFrame {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
 
+    }
+
+    // Required by ListSelectionListener
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
     }
 
     // Represents the listener of the buttons in the main menu of the GUI

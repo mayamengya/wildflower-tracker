@@ -31,6 +31,7 @@ public class WildflowerList implements Writable {
     // MODIFIES: this
     // EFFECTS: adds a new wildflower to list
     public void addWildflower(Wildflower wildflower) {
+        EventLog.getInstance().logEvent(new Event("Added Wildflower to: " + title));
         wildflowerList.add(wildflower);
     }
 
@@ -44,6 +45,7 @@ public class WildflowerList implements Writable {
                     wildflower.getLocation().equals(location)
                     &&
                     wildflower.getMonth().equals(month)) {
+                EventLog.getInstance().logEvent(new Event("Removed Wildflower from: " + title));
                 wildflowerList.remove(wildflower);
                 return true;
             }
@@ -51,11 +53,13 @@ public class WildflowerList implements Writable {
         return false;
     }
 
-    // EFFECTS: return true if Wildflower with the same type as the given type is in collection,
+    // EFFECTS: return true if Wildflower with the same type as the given type is in collection.
     // Otherwise, return false.
     public Boolean haveISeenThisWildflower(String type) {
         for (Wildflower wildflower : wildflowerList) {
             if (wildflower.getType().equals(type)) {
+                EventLog.getInstance().logEvent(new Event("Discovered a wildflower already seen in "
+                        + title));
                 return true;
             }
         }
@@ -69,6 +73,8 @@ public class WildflowerList implements Writable {
             String currentType = currentWildflower.getType();
             if (!wildflowerTypes.contains(currentType)) {
                 wildflowerTypes.add(currentType);
+                EventLog.getInstance().logEvent(new Event("Checked all wildflower types in "
+                        + title));
             }
         }
         return wildflowerTypes;
@@ -80,6 +86,8 @@ public class WildflowerList implements Writable {
         for (Wildflower wildflower : wildflowerList) {
             if (wildflower.getType().equals(type)) {
                 wildflowerLocations.add(wildflower.getLocation());
+                EventLog.getInstance().logEvent(new Event("Checked all wildflower locations in "
+                        + title));
             }
         }
         return wildflowerLocations;
@@ -93,7 +101,7 @@ public class WildflowerList implements Writable {
         return json;
     }
 
-    // EFFECTS: returns things in this wildflowerlist as a JSON array
+    // EFFECTS: returns things in this wildflower list as a JSON array
     private JSONArray wildflowersToJson() {
         JSONArray jsonArray = new JSONArray();
 
