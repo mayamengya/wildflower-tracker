@@ -258,34 +258,38 @@ public class GUI extends JFrame implements ListSelectionListener {
                             "Unsuccessful", JOptionPane.INFORMATION_MESSAGE, icon);
                 }
             } catch (NullPointerException e) {
-                // how do I close my JOptionPane
+                // nothing happens when caught, user closes pane
             }
         }
 
         // MODIFIES: this
         // EFFECTS: opens window for user input the type, location and month of the wildflower they want to remove
         public void removeWildflowerAction() {
-            ImageIcon icon = new ImageIcon("wildflower-tracker-icon.png");
-            String type = JOptionPane.showInputDialog(null,
-                    "Enter the type of the wildflower you want to remove:",
-                    "Remove Wildflower", JOptionPane.PLAIN_MESSAGE, icon,
-                    null, "").toString();
-            String location = JOptionPane.showInputDialog(null,
-                    "Enter the location where you found the wildflower:",
-                    "Remove Wildflower", JOptionPane.PLAIN_MESSAGE, icon,
-                    null, "").toString();
-            String month = JOptionPane.showInputDialog(null,
-                    "Enter the month when you found the wildflower:", "Remove Wildflower",
-                    JOptionPane.PLAIN_MESSAGE, icon, null, "").toString();
+            try {
+                ImageIcon icon = new ImageIcon("wildflower-tracker-icon.png");
+                String type = JOptionPane.showInputDialog(null,
+                        "Enter the type of the wildflower you want to remove:",
+                        "Remove Wildflower", JOptionPane.PLAIN_MESSAGE, icon,
+                        null, "").toString();
+                String location = JOptionPane.showInputDialog(null,
+                        "Enter the location where you found the wildflower:",
+                        "Remove Wildflower", JOptionPane.PLAIN_MESSAGE, icon,
+                        null, "").toString();
+                String month = JOptionPane.showInputDialog(null,
+                        "Enter the month when you found the wildflower:", "Remove Wildflower",
+                        JOptionPane.PLAIN_MESSAGE, icon, null, "").toString();
 
-            if (wildflowerList.removeWildflower(type, location, month)) {
-                JOptionPane.showMessageDialog(null, "Wildflower removed successfully!",
-                        "Success", JOptionPane.INFORMATION_MESSAGE, icon);
-            } else {
-                JOptionPane.showMessageDialog(null, "Wildflower not found. Please try again.",
-                        "Unsuccessful", JOptionPane.INFORMATION_MESSAGE, icon);
+                if (wildflowerList.removeWildflower(type, location, month)) {
+                    JOptionPane.showMessageDialog(null, "Wildflower removed successfully!",
+                            "Success", JOptionPane.INFORMATION_MESSAGE, icon);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Wildflower not found. Please try again.",
+                            "Unsuccessful", JOptionPane.INFORMATION_MESSAGE, icon);
+                }
+
+            } catch (NullPointerException e) {
+                // nothing happens when caught, user closes pane
             }
-
         }
 
         // MODIFIES: this
@@ -329,27 +333,31 @@ public class GUI extends JFrame implements ListSelectionListener {
         // MODIFIES: this
         //EFFECTS: displays all the locations the inputted has been seen before, no duplicates
         public void displayLocationsAction() {
-            ImageIcon icon = new ImageIcon("wildflower-tracker-icon.png");
-            String type = JOptionPane.showInputDialog(null, "Enter the type of wildflower:",
-                    "Display Locations", JOptionPane.PLAIN_MESSAGE, icon, null, "").toString();
+            try {
+                ImageIcon icon = new ImageIcon("wildflower-tracker-icon.png");
+                String type = JOptionPane.showInputDialog(null, "Enter the type of wildflower:",
+                        "Display Locations", JOptionPane.PLAIN_MESSAGE, icon, null, "").toString();
 
-            if (type != null && !type.isEmpty()) {
-                List<String> locations = wildflowerList.getWildflowerLocations(type);
+                if (type != null && !type.isEmpty()) {
+                    List<String> locations = wildflowerList.getWildflowerLocations(type);
 
-                if (locations.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "No locations found for this wildflower type.",
-                            "No Results", JOptionPane.INFORMATION_MESSAGE, icon);
-                } else {
-                    StringBuilder message = new StringBuilder("Locations where " + type + " has been found:\n");
-                    for (String location : locations) {
-                        message.append(location).append("\n");
+                    if (locations.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "No locations found for this wildflower type.",
+                                "No Results", JOptionPane.INFORMATION_MESSAGE, icon);
+                    } else {
+                        StringBuilder message = new StringBuilder("Locations where " + type + " has been found:\n");
+                        for (String location : locations) {
+                            message.append(location).append("\n");
+                        }
+                        JOptionPane.showMessageDialog(null, message.toString(), "Wildflower Locations",
+                                JOptionPane.INFORMATION_MESSAGE, icon);
                     }
-                    JOptionPane.showMessageDialog(null, message.toString(), "Wildflower Locations",
-                            JOptionPane.INFORMATION_MESSAGE, icon);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid input. Please try again.",
+                            "Unsuccessful", JOptionPane.INFORMATION_MESSAGE, icon);
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Invalid input. Please try again.",
-                        "Unsuccessful", JOptionPane.INFORMATION_MESSAGE, icon);
+            } catch (NullPointerException e) {
+                // nothing happens when caught, user closes pane
             }
 
         }

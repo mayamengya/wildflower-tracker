@@ -1,15 +1,4 @@
 {
-    "wildflower": [
-        {
-            "month": "june",
-            "location": "surrey",
-            "type": "sunflower"
-        },
-        {
-            "month": "april",
-            "location": "ubc",
-            "type": "cherry blossom"
-        }
-    ],
+    "wildflower": [],
     "title": "My Wildflower List"
 }

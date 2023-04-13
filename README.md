@@ -44,3 +44,22 @@ valuable data on how environments around us is changing.
   added to the buttons specified in the previous points.
 - You can save the state of my application by clicking the button labelled "Save".
 - You can reload the state of my application by clicking the button labelled "Load".
+
+# Phase 4: Task 2
+A representative sample of the events that occur when this program runs:
+
+Wed Apr 12 22:10:29 PDT 2023
+Event log cleared.
+
+Wed Apr 12 22:10:32 PDT 2023
+Added wildflower to: My Wildflower List
+
+Wed Apr 12 22:10:34 PDT 2023
+Checked all wildflower types seen so far in: My Wildflower List
+
+Wed Apr 12 22:10:37 PDT 2023
+Checked all locations of a specific wildflower in: My Wildflower List
+
+Wed Apr 12 22:10:40 PDT 2023
+Removed wildflower from: My Wildflower List
+
