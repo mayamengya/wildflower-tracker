@@ -2,6 +2,8 @@
 
 ## Track nature's blooms with ease 
 
+![Wildflower Image](https://github.com/mayamengya/wildflower-tracker/blob/main/wildflower-tracker.png)
+
 **What will the application do?**
 - This application will allow users to track the wildflowers 
 they spot outdoors by entering the type of wildflower that
